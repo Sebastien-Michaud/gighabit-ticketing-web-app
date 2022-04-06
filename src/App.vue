@@ -2,16 +2,16 @@
 import { ref } from 'vue'
 import { DynamoDB, DynamoDBClient, UpdateItemCommand } from "@aws-sdk/client-dynamodb"
 import { PutCommand, QueryCommand } from "@aws-sdk/lib-dynamodb"
-import { fromIni } from "@aws-sdk/credential-provider-ini"
+import axios from "axios"
 
 // Set the AWS Region.
 const REGION = "eu-west-2" // For example, "us-east-1".
 
+//Set credentials
+
+
 // Create an Amazon DynamoDB service client object.
-// const ddbClient = new DynamoDBClient({ credentials: { accessKeyId: accessKeyId, secretAccessKey: secretAccessKey }, region: REGION })
-const ddbClient = new DynamoDB.DynamoDBClient({
-  credentials: fromIni({profile: 'dynamodb'})
-});
+const ddbClient = new DynamoDBClient({ credentials: { accessKeyId: accessKeyId, secretAccessKey: secretAccessKey }, region: REGION })
 
 const eventName = ref('')
 const eventStartDate = ref('')
@@ -114,4 +114,6 @@ async function handleSubmit() {
   <p>ID: {{ ID }}</p>
   <p>tableData: {{ tableData }}</p>
   <p>originalID: {{ originalID }}</p>
+  <p>token: {{ token }}</p>
+  <p>REST data: {{ data }}</p>
 </template>
