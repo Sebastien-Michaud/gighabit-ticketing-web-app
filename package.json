@@ -2,7 +2,7 @@
   "name": "vue_test",
   "version": "0.0.0",
   "scripts": {
-    "dev": "vite",
+    "dev": "vite --host --https",
     "build": "vite build",
     "preview": "vite preview --port 5050"
   },
@@ -13,6 +13,7 @@
     "@aws-sdk/credential-providers": "^3.58.0",
     "@aws-sdk/lib-dynamodb": "^3.55.0",
     "aws-sdk": "^2.1106.0",
+    "axios": "^0.26.1",
     "uuid": "^8.3.2",
     "vue": "^3.2.31"
   },
