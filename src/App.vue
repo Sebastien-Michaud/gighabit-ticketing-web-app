@@ -5,7 +5,7 @@ import { PutCommand, QueryCommand } from "@aws-sdk/lib-dynamodb"
 import AWSCredentials from "./AWSCredentials.json"
 
 // Set the AWS Region.
-const REGION = "eu-west-2" // For example, "us-east-1".
+const REGION = "eu-west-2" 
 
 //Set credentials
 const accessKeyId = AWSCredentials['accessKeyId']
@@ -23,6 +23,8 @@ const log = ref('')
 const ID = ref('')
 const originalID = ref('')
 const tableData = ref('')
+
+const signOutURL = "https://gighabit-ticketing.auth.eu-west-2.amazoncognito.com/logout?client_id= kelm8fid312g68ul7h1ml9f9q&logout_uri=https://gighabit-ticketing.auth.eu-west-2.amazoncognito.com/login?client_id=kelm8fid312g68ul7h1ml9f9q&response_type=code&scope=email+openid+phone&redirect_uri=https%3A%2F%2F18.130.254.119%3A3000%2F"
 
 async function handleSubmit() {
   
@@ -84,7 +86,17 @@ async function handleSubmit() {
     log.value = err
   }
 
+  //Empty form fields
+  eventName.value = ""
+  eventStartDate.value = ""
+  eventEndDate.value = ""
+
   submitted.value = true
+}
+
+function logOut(event) {
+  const response = fetch(signOutURL.value)
+  log.value = response
 }
 </script>
 
@@ -109,12 +121,17 @@ async function handleSubmit() {
 
     <button type="submit">Submit</button>
   </form>
-
+  
+  <!--<button @click="logOut">Log Out</button>-->
+  
+  <form @submit.prevent="logOut"> 
+    <button type="submit">Log Out</button>
+  </form>
+  
   <p>Submitted: {{ submitted }}</p>
   <p>Log: {{ log }}</p>
   <p>ID: {{ ID }}</p>
   <p>tableData: {{ tableData }}</p>
   <p>originalID: {{ originalID }}</p>
-  <p>token: {{ token }}</p>
   <p>REST data: {{ data }}</p>
 </template>
