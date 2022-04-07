@@ -2,13 +2,14 @@
 import { ref } from 'vue'
 import { DynamoDB, DynamoDBClient, UpdateItemCommand } from "@aws-sdk/client-dynamodb"
 import { PutCommand, QueryCommand } from "@aws-sdk/lib-dynamodb"
-import axios from "axios"
+import AWSCredentials from "./AWSCredentials.json"
 
 // Set the AWS Region.
 const REGION = "eu-west-2" // For example, "us-east-1".
 
 //Set credentials
-
+const accessKeyId = AWSCredentials['accessKeyId']
+const secretAccessKey = AWSCredentials['secretAccessKey']
 
 // Create an Amazon DynamoDB service client object.
 const ddbClient = new DynamoDBClient({ credentials: { accessKeyId: accessKeyId, secretAccessKey: secretAccessKey }, region: REGION })
